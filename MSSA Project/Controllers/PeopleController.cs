@@ -9,6 +9,22 @@ namespace MSSA_Project.Controllers
 {
     public class PeopleController : Controller
     {
+
+        // GET: Person
+        public ActionResult PersonView()
+        {
+            var details = new MSSA_Project.Models.PersonModel()
+            {
+                FirstName = "Mako",
+                LastName = "Bryant",
+                Age = 42,
+                IsAlive = true,
+            };
+
+            ViewData["Person"] = details;
+            return View();
+        }
+
         // GET: People
         public ActionResult Index()
         {
