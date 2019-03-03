@@ -13,10 +13,10 @@ namespace MVC_Practice
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MSSAEntities : DbContext
+    public partial class MSSAEntities1 : DbContext
     {
-        public MSSAEntities()
-            : base("name=MSSAEntities")
+        public MSSAEntities1()
+            : base("name=MSSAEntities1")
         {
         }
     

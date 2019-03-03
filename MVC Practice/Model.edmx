@@ -10,8 +10,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="details" Type="text" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="details" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="comments">
           <Key>
@@ -20,7 +20,7 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="media_id" Type="int" Nullable="false" />
           <Property Name="users_id" Type="int" Nullable="false" />
-          <Property Name="comment_content" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="comment_content" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="posted_at" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="media">
@@ -45,16 +45,16 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="user_password" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="user_password" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="account_type" Type="int" Nullable="false" />
           <Property Name="created_at" Type="datetime" Nullable="false" />
         </EntityType>
@@ -75,8 +75,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="details" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="comment">
           <Key>
@@ -85,7 +85,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="media_id" Type="Int32" Nullable="false" />
           <Property Name="users_id" Type="Int32" Nullable="false" />
-          <Property Name="comment_content" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment_content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="posted_at" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="medium">
@@ -110,20 +110,20 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="user_password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="account_type" Type="Int32" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="MSSAEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MSSAEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="categories" EntityType="Self.category" />
           <EntitySet Name="comments" EntityType="Self.comment" />
           <EntitySet Name="media" EntityType="Self.medium" />
@@ -135,7 +135,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MSSAModelStoreContainer" CdmEntityContainer="MSSAEntities">
+        <EntityContainerMapping StorageEntityContainer="MSSAModelStoreContainer" CdmEntityContainer="MSSAEntities1">
           <EntitySetMapping Name="categories">
             <EntityTypeMapping TypeName="MSSAModel.category">
               <MappingFragment StoreEntitySet="category">
