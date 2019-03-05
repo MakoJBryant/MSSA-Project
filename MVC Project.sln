@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web Based Events Management System", "Web Based Events Management System\Web Based Events Management System.csproj", "{88D66E6C-63A6-4BC4-8773-7405D35B2FC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project", "Web Based Events Management System\Project.csproj", "{88D66E6C-63A6-4BC4-8773-7405D35B2FC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
