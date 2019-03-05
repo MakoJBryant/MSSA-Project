@@ -7,24 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC_Practice
+namespace MVC_Practice.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class medium
+    public partial class comment
     {
         public int id { get; set; }
-        public string title { get; set; }
-        public string media_desc { get; set; }
-        public string file_title { get; set; }
-        public int size { get; set; }
-        public Nullable<int> likes { get; set; }
-        public Nullable<int> media_views { get; set; }
-        public Nullable<int> downloads { get; set; }
-        public Nullable<int> category_id { get; set; }
+        public int media_id { get; set; }
         public int users_id { get; set; }
-        public int media_type_id { get; set; }
-        public System.DateTime created_at { get; set; }
+        public string comment_content { get; set; }
+        public System.DateTime posted_at { get; set; }
     }
 }

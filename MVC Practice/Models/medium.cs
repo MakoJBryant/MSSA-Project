@@ -7,18 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC_Practice
+namespace MVC_Practice.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class medium
     {
         public int id { get; set; }
-        public string username { get; set; }
-        public string user_password { get; set; }
-        public string email { get; set; }
-        public int account_type { get; set; }
+        public string title { get; set; }
+        public string media_desc { get; set; }
+        public string file_title { get; set; }
+        public int size { get; set; }
+        public Nullable<int> likes { get; set; }
+        public Nullable<int> media_views { get; set; }
+        public Nullable<int> downloads { get; set; }
+        public Nullable<int> category_id { get; set; }
+        public int users_id { get; set; }
+        public int media_type_id { get; set; }
         public System.DateTime created_at { get; set; }
     }
 }

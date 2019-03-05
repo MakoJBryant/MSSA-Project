@@ -123,7 +123,7 @@
           <Property Name="account_type" Type="Int32" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="MSSAEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="categories" EntityType="Self.category" />
           <EntitySet Name="comments" EntityType="Self.comment" />
           <EntitySet Name="media" EntityType="Self.medium" />
@@ -135,7 +135,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MSSAModelStoreContainer" CdmEntityContainer="MSSAEntities1">
+        <EntityContainerMapping StorageEntityContainer="MSSAModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="categories">
             <EntityTypeMapping TypeName="MSSAModel.category">
               <MappingFragment StoreEntitySet="category">

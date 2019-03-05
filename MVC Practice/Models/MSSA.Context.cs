@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC_Practice
+namespace MVC_Practice.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MSSAEntities1 : DbContext
+    public partial class Entities : DbContext
     {
-        public MSSAEntities1()
-            : base("name=MSSAEntities1")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

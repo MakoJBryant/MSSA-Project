@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC_Practice
+namespace MVC_Practice.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class comment
+    public partial class user
     {
         public int id { get; set; }
-        public int media_id { get; set; }
-        public int users_id { get; set; }
-        public string comment_content { get; set; }
-        public System.DateTime posted_at { get; set; }
+        public string username { get; set; }
+        public string user_password { get; set; }
+        public string email { get; set; }
+        public int account_type { get; set; }
+        public System.DateTime created_at { get; set; }
     }
 }

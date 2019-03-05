@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MVC_Practice
+namespace MVC_Practice.Models
 {
     using System;
     using System.Collections.Generic;
