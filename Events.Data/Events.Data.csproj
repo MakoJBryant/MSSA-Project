@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="Event.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
