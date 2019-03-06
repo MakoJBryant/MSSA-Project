@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Web_Based_Events_Management_System.Models
+namespace Events.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
@@ -68,6 +68,10 @@ namespace Web_Based_Events_Management_System.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
 
         // Altering password requirements to make testing easier.
         [Required]

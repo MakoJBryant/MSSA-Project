@@ -6,9 +6,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Web_Based_Events_Management_System.Models;
+using Events.Web.Models;
 
-namespace Web_Based_Events_Management_System
+namespace Events.Web
 {
     public partial class Startup
     {

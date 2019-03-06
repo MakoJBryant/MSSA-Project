@@ -58,6 +58,7 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="Migrations\DbMigrationsConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

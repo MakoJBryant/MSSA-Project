@@ -9,9 +9,9 @@ using Events.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Web_Based_Events_Management_System.Models;
+using Events.Web.Models;
 
-namespace Web_Based_Events_Management_System.Controllers
+namespace Events.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -152,7 +152,7 @@ namespace Web_Based_Events_Management_System.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

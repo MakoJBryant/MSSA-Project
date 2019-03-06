@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace Web_Based_Events_Management_System.Models
+namespace Events.Web.Models
 {
     public class IndexViewModel
     {

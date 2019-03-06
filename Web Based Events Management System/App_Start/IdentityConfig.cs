@@ -11,9 +11,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Web_Based_Events_Management_System.Models;
+using Events.Web.Models;
 
-namespace Web_Based_Events_Management_System
+namespace Events.Web
 {
     public class EmailService : IIdentityMessageService
     {

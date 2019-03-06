@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Web_Based_Events_Management_System.Controllers
+namespace Events.Web.Controllers
 {
     public class HomeController : Controller
     {

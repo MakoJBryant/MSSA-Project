@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Web_Based_Events_Management_System
+namespace Events.Web
 {
     public class RouteConfig
     {
