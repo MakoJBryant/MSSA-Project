@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Events.Data
 {
-    class Event
+    public class Event
     {
         public Event()
         {

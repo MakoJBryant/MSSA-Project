@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Events.Data
 {
-    class Comment
+    public class Comment
     {
         public Comment()
         {
