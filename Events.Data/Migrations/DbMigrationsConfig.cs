@@ -19,7 +19,7 @@ namespace Events.Data.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            // Seed initial data only if the database is empy.
+            // Seed initial data only if the database is empty.
             if (!context.Users.Any())
             {
                 var adminEmail = "admin@admin.com";
