@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Project.Data;
 
+// Set user roles (I.E. Admin, user, etc).
 [assembly: HostingStartup(typeof(Project.Areas.Identity.IdentityHostingStartup))]
 namespace Project.Areas.Identity
 {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Options;
-using Project.Services;
+using System.Threading.Tasks;
 
 namespace Project.Services
 {
@@ -30,8 +26,7 @@ namespace Project.Services
             var client = new SendGridClient(apikey);
             var msg = new SendGridMessage()
             {
-                // TODO: 
-                From = new EmailAddress("@gmail.com", "Web Master"),
+                From = new EmailAddress("makojbryant@gmail.com", "Admin"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
