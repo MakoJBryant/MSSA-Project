@@ -51,6 +51,10 @@ namespace Project
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            // Changes all data protection tokens timeout period to 3 hours.
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+                o.TokenLifespan = TimeSpan.FromHours(3));
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
