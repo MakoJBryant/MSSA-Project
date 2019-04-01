@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+/* DO NOT TOUCH */
+
+using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 

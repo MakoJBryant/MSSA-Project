@@ -28,28 +28,35 @@ namespace Project
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // Configures Identity with default option values. Services are made available to the app through dependency injection.
+        private string userAuthConnection;
+
+        // Configures Identity with default option values. Services are added through dependency injection.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Builds the connection string with the password.
+            var builder = new SqlConnectionStringBuilder(
+                Configuration.GetConnectionString("UserAuthentication"));
+            builder.Password = Configuration["databasepw"];
+
+            userAuthConnection = builder.ConnectionString;
+
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            // Set database in use.
+            services.AddDbContext<UserAuthenticationContext>(options =>
+                options.UseSqlServer(userAuthConnection));
+
 
             services.AddDefaultIdentity<IdentityUser>(config =>
             {
-                // Require email confirmation before login.
                 config.SignIn.RequireConfirmedEmail = true;
             })
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<UserAuthenticationContext>();
 
             // Changes all data protection tokens timeout period to 3 hours.
             services.Configure<DataProtectionTokenProviderOptions>(o =>

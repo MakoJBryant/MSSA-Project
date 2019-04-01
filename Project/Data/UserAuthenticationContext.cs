@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Project.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class UserAuthenticationContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public UserAuthenticationContext(DbContextOptions<UserAuthenticationContext> options)
             : base(options)
         {
+
         }
     }
 }
