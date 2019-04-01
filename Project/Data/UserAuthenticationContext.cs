@@ -9,9 +9,6 @@ namespace Project.Data
     public class UserAuthenticationContext : IdentityDbContext
     {
         public UserAuthenticationContext(DbContextOptions<UserAuthenticationContext> options)
-            : base(options)
-        {
-
-        }
+            : base(options) { }
     }
 }

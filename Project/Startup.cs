@@ -28,27 +28,33 @@ namespace Project
 
         public IConfiguration Configuration { get; }
 
+
+        // Database connection string variables.
         private string userAuthConnection;
+        private string applicationDataConnection;
+
 
         // Configures Identity with default option values. Services are added through dependency injection.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Builds the connection string with the password.
-            var builder = new SqlConnectionStringBuilder(
+            // Builds the connection strings for each db connection (with user secrets pw).
+            var authBuilder = new SqlConnectionStringBuilder(
                 Configuration.GetConnectionString("UserAuthentication"));
-            builder.Password = Configuration["databasepw"];
+            authBuilder.Password = Configuration["databasepw"];
+            userAuthConnection = authBuilder.ConnectionString;
 
-            userAuthConnection = builder.ConnectionString;
+            var appBuilder = new SqlConnectionStringBuilder(
+                Configuration.GetConnectionString("ApplicationData"));
+            appBuilder.Password = Configuration["databasepw"];
+            applicationDataConnection = appBuilder.ConnectionString;
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
 
-            // Set database in use.
+            // Create and set database contexts.
             services.AddDbContext<UserAuthenticationContext>(options =>
                 options.UseSqlServer(userAuthConnection));
+            services.AddDbContext<ApplicationDataContext>(options =>
+                options.UseSqlServer(applicationDataConnection));
+
 
 
             services.AddDefaultIdentity<IdentityUser>(config =>
@@ -83,6 +89,14 @@ namespace Project
                 options.User.RequireUniqueEmail = false;
             });
 
+
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
@@ -95,9 +109,9 @@ namespace Project
             });
 
 
+
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddTransient<IEmailSender, EmailSender>();
-                  
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
