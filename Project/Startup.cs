@@ -48,14 +48,12 @@ namespace Project
             appBuilder.Password = Configuration["databasepw"];
             applicationDataConnection = appBuilder.ConnectionString;
 
-
             // Create and set database contexts.
             services.AddDbContext<UserAuthenticationContext>(options =>
                 options.UseSqlServer(userAuthConnection));
             services.AddDbContext<ApplicationDataContext>(options =>
                 options.UseSqlServer(applicationDataConnection));
-
-
+            
 
             services.AddDefaultIdentity<IdentityUser>(config =>
             {
@@ -108,8 +106,7 @@ namespace Project
                 options.SlidingExpiration = true;
             });
 
-
-
+            
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
