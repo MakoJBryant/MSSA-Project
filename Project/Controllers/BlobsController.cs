@@ -2,8 +2,12 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Project.Controllers
 {
@@ -14,14 +18,12 @@ namespace Project.Controllers
             return View();
         }
 
-        [HttpPost]
         private CloudBlobContainer GetCloudBlobContainer()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
             IConfigurationRoot Configuration = builder.Build();
-
 
             // Parse the connection string and return a reference to the storage account.
             var BlobConnectionString = Configuration.GetSection("ConnectionStrings:AzureStorageConnectionString-1");

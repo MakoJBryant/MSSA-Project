@@ -53,7 +53,6 @@ namespace Project
                 options.UseSqlServer(userAuthConnection));
             services.AddDbContext<ApplicationDataContext>(options =>
                 options.UseSqlServer(applicationDataConnection));
-            
 
             services.AddDefaultIdentity<IdentityUser>(config =>
             {
