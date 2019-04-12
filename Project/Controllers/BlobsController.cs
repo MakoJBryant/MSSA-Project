@@ -84,6 +84,8 @@ namespace Project.Controllers
             return View(blobs);
         }
 
+        /*
+        // This function is built into the HTML video tag.
         public string DownloadBlob()
         {
             CloudBlobContainer container = GetCloudBlobContainer();
@@ -94,6 +96,7 @@ namespace Project.Controllers
             }
             return "success!";
         }
+        */
 
         public string DeleteBlob()
         {
