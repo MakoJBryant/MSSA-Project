@@ -55,8 +55,7 @@ namespace Project.Controllers
             }
             return "success!";
         }
-
-
+        
         public ActionResult ListBlobs()
         {
             CloudBlobContainer container = GetCloudBlobContainer();
