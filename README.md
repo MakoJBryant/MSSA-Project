@@ -15,13 +15,14 @@ ASP.NET Core 2.2 MVC web app
 
 | ID             | Description   | Test Method   | Test Procedure | Current Status  | TimeStamp     |
 | -------------  | ------------- | ------------- | -------------  | -------------   | ------------- |
-| Content Cell   | Content Cell  | Content Cell  | Content Cell   | Content Cell    | Content Cell  |
-| Content Cell   | Content Cell  | Content Cell  | Content Cell   | Content Cell    | Content Cell  |
-| Content Cell   | Content Cell  | Content Cell  | Content Cell   | Content Cell    | Content Cell  |
-| Content Cell   | Content Cell  | Content Cell  | Content Cell   | Content Cell    | Content Cell  |
-| Content Cell   | Content Cell  | Content Cell  | Content Cell   | Content Cell    | Content Cell  |
-| Content Cell   | Content Cell  | Content Cell  | Content Cell   | Content Cell    | Content Cell  |
-| Content Cell   | Content Cell  | Content Cell  | Content Cell   | Content Cell    | Content Cell  |
+| 1.0 | User Accounts | Demonstration  | Click on register, fill out information, generate authentication token, and store user details in database. Sign in using details provided for account.  | Passing | 29/04/2019 0803 |
+| 2.0   | Account Verification  | Demonstration  | After creating an account, go to email provided and click the link sent by the app, which will verify the account and allow the user to login. | Passing | 29/04/2019 0803 |
+| 3.0 | Video Storage | Demonstration | Click on the upload button from the home page, fill out video details, select video file to be uploaded and click upload. Video should be saved in blob storage with url to image stored in the database. | Not Passing | 29/04/2019 0803 |
+| 4.0 | Video Player | Demonstration | Navigate to specific video url and video should start playing on every major internet browser. | Not Passing | 29/04/2019 0803 |
+| 5.0 | Search Bar | Demonstration | Search for a video (will search for title, description, tags, etc.) and appropriate videos will come up. | Not Passing | 29/04/2019 0803 |
+| 6.0 | Comments | Demonstration | View comments on a video, post a comment, and edit a comment previously posted. | Not Passing | 29/04/2019 0803 |
+| 7.0 | Suggested Videos | Demonstration | Home page will display videos targeted at the user currently logged in. | Not Passing | 29/04/2019 0803 |
+
 
 
 
