@@ -2,14 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="watchLeftColumn">
+
+    <video class="videoPlayer" controls autoplay>
+        <source src="https://videotubeblob.blob.core.windows.net/blobcontainer/video.mp4" type="video/mp4">
+        <source src="https://videotubeblob.blob.core.windows.net/blobcontainer/video.ogg" type="video/ogg">
+        <source src="https://videotubeblob.blob.core.windows.net/blobcontainer/video.webm" type="video/webm">
+        Your browser doesn"t support HTML5 video.
+    </video>
+
 </div>
 
-<video max-width:100% height="360" controls autoplay loop>
-    <source type="video/webm" src="https://videotubeblob.blob.core.windows.net/blobcontainer/video.webm" />
-    <source type="video/ogg" src="https://videotubeblob.blob.core.windows.net/blobcontainer/video.ogg" />
-    <source type="video/mp4" src="https://videotubeblob.blob.core.windows.net/blobcontainer/video.mp4" />
-    Your browser doesn't support HTML5 video.
-</video>
+<div class="suggestions">
+
+</div>
+
+

@@ -15,7 +15,7 @@ namespace Project.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Upload()
         {
             return View();
         }
