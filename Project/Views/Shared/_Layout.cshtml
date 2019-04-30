@@ -30,7 +30,7 @@
             </button>
 
             <a class="logoContainer" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="~/images/icons/VideoTubeLogo.png" />
+                <img src="~/images/icons/TheAzureTubeLogo.png" />
             </a>
 
             <div class="searchBarContainer">
@@ -49,21 +49,15 @@
         <div id="mainSectionContainer">
 
             <div id="mainContentContainer">
-                <div class="container">
-                    <partial name="_CookieConsentPartial" />
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - Project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <partial name="_CookieConsentPartial" />
+                @RenderBody()
+
+            </div>
+
         </div>
-    </footer>
+
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
