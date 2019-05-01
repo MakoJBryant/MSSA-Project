@@ -29,15 +29,17 @@ namespace Project
                 if (context.HostingEnvironment.IsProduction())
                 {
                     var builtConfig = config.Build();
-
+                    var keyVaultEndpoint = "https://theazuretube-kv-0.vault.azure.net/";
                     var azureServiceTokenProvider = new AzureServiceTokenProvider();
                     var keyVaultClient = new KeyVaultClient(
                         new KeyVaultClient.AuthenticationCallback(
                             azureServiceTokenProvider.KeyVaultTokenCallback));
-
-                    var keyVaultEndpoint = "https://mssa-project-kv.vault.azure.net/";
-                    config.AddAzureKeyVault(keyVaultEndpoint,
-                        keyVaultClient, new DefaultKeyVaultSecretManager());
+                    
+                    config.AddAzureKeyVault(
+                        keyVaultEndpoint,
+                        keyVaultClient, 
+                        new DefaultKeyVaultSecretManager()
+                        );
                 }
             })
             .UseStartup<Startup>();
