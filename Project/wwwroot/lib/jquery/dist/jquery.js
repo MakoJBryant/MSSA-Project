@@ -4598,7 +4598,7 @@ function getDefaultDisplay( elem ) {
 	return display;
 }
 
-function showHide( elements, show ) {
+function showtoggle( elements, show ) {
 	var display, elem,
 		values = [],
 		index = 0,
@@ -4648,21 +4648,21 @@ function showHide( elements, show ) {
 
 jQuery.fn.extend( {
 	show: function() {
-		return showHide( this, true );
+		return showtoggle( this, true );
 	},
-	hide: function() {
-		return showHide( this );
+	toggle: function() {
+		return showtoggle( this );
 	},
 	toggle: function( state ) {
 		if ( typeof state === "boolean" ) {
-			return state ? this.show() : this.hide();
+			return state ? this.show() : this.toggle();
 		}
 
 		return this.each( function() {
 			if ( isHiddenWithinTree( this ) ) {
 				jQuery( this ).show();
 			} else {
-				jQuery( this ).hide();
+				jQuery( this ).toggle();
 			}
 		} );
 	}
@@ -6799,7 +6799,7 @@ jQuery.fx.step = {};
 
 var
 	fxNow, inProgress,
-	rfxtypes = /^(?:toggle|show|hide)$/,
+	rfxtypes = /^(?:toggle|show|toggle)$/,
 	rrun = /queueHooks$/;
 
 function schedule() {
@@ -6892,20 +6892,20 @@ function defaultPrefilter( elem, props, opts ) {
 		} );
 	}
 
-	// Detect show/hide animations
+	// Detect show/toggle animations
 	for ( prop in props ) {
 		value = props[ prop ];
 		if ( rfxtypes.test( value ) ) {
 			delete props[ prop ];
 			toggle = toggle || value === "toggle";
-			if ( value === ( hidden ? "hide" : "show" ) ) {
+			if ( value === ( hidden ? "toggle" : "show" ) ) {
 
 				// Pretend to be hidden if this is a "show" and
-				// there is still data from a stopped show/hide
+				// there is still data from a stopped show/toggle
 				if ( value === "show" && dataShow && dataShow[ prop ] !== undefined ) {
 					hidden = true;
 
-				// Ignore all other no-op show/hide data
+				// Ignore all other no-op show/toggle data
 				} else {
 					continue;
 				}
@@ -6914,7 +6914,7 @@ function defaultPrefilter( elem, props, opts ) {
 		}
 	}
 
-	// Bail out if this is a no-op like .hide().hide()
+	// Bail out if this is a no-op like .toggle().toggle()
 	propTween = !jQuery.isEmptyObject( props );
 	if ( !propTween && jQuery.isEmptyObject( orig ) ) {
 		return;
@@ -6929,7 +6929,7 @@ function defaultPrefilter( elem, props, opts ) {
 		// the overflowX value there.
 		opts.overflow = [ style.overflow, style.overflowX, style.overflowY ];
 
-		// Identify a display type, preferring old show/hide data over the CSS cascade
+		// Identify a display type, preferring old show/toggle data over the CSS cascade
 		restoreDisplay = dataShow && dataShow.display;
 		if ( restoreDisplay == null ) {
 			restoreDisplay = dataPriv.get( elem, "display" );
@@ -6941,10 +6941,10 @@ function defaultPrefilter( elem, props, opts ) {
 			} else {
 
 				// Get nonempty value(s) by temporarily forcing visibility
-				showHide( [ elem ], true );
+				showtoggle( [ elem ], true );
 				restoreDisplay = elem.style.display || restoreDisplay;
 				display = jQuery.css( elem, "display" );
-				showHide( [ elem ] );
+				showtoggle( [ elem ] );
 			}
 		}
 
@@ -6952,7 +6952,7 @@ function defaultPrefilter( elem, props, opts ) {
 		if ( display === "inline" || display === "inline-block" && restoreDisplay != null ) {
 			if ( jQuery.css( elem, "float" ) === "none" ) {
 
-				// Restore the original display value at the end of pure show/hide animations
+				// Restore the original display value at the end of pure show/toggle animations
 				if ( !propTween ) {
 					anim.done( function() {
 						style.display = restoreDisplay;
@@ -6976,11 +6976,11 @@ function defaultPrefilter( elem, props, opts ) {
 		} );
 	}
 
-	// Implement show/hide animations
+	// Implement show/toggle animations
 	propTween = false;
 	for ( prop in orig ) {
 
-		// General show/hide setup for this element animation
+		// General show/toggle setup for this element animation
 		if ( !propTween ) {
 			if ( dataShow ) {
 				if ( "hidden" in dataShow ) {
@@ -6997,7 +6997,7 @@ function defaultPrefilter( elem, props, opts ) {
 
 			// Show elements before animating them
 			if ( hidden ) {
-				showHide( [ elem ], true );
+				showtoggle( [ elem ], true );
 			}
 
 			/* eslint-disable no-loop-func */
@@ -7006,9 +7006,9 @@ function defaultPrefilter( elem, props, opts ) {
 
 			/* eslint-enable no-loop-func */
 
-				// The final step of a "hide" animation is actually hiding the element
+				// The final step of a "toggle" animation is actually hiding the element
 				if ( !hidden ) {
-					showHide( [ elem ] );
+					showtoggle( [ elem ] );
 				}
 				dataPriv.remove( elem, "fxshow" );
 				for ( prop in orig ) {
@@ -7398,7 +7398,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-jQuery.each( [ "toggle", "show", "hide" ], function( i, name ) {
+jQuery.each( [ "toggle", "show", "toggle" ], function( i, name ) {
 	var cssFn = jQuery.fn[ name ];
 	jQuery.fn[ name ] = function( speed, easing, callback ) {
 		return speed == null || typeof speed === "boolean" ?
@@ -7410,10 +7410,10 @@ jQuery.each( [ "toggle", "show", "hide" ], function( i, name ) {
 // Generate shortcuts for custom animations
 jQuery.each( {
 	slideDown: genFx( "show" ),
-	slideUp: genFx( "hide" ),
+	slideUp: genFx( "toggle" ),
 	slideToggle: genFx( "toggle" ),
 	fadeIn: { opacity: "show" },
-	fadeOut: { opacity: "hide" },
+	fadeOut: { opacity: "toggle" },
 	fadeToggle: { opacity: "toggle" }
 }, function( name, props ) {
 	jQuery.fn[ name ] = function( speed, easing, callback ) {
@@ -10314,7 +10314,7 @@ jQuery.isNumeric = function( obj ) {
 // way to register. Lowercase jquery is used because AMD module names are
 // derived from file names, and jQuery is normally delivered in a lowercase
 // file name. Do this after creating the global so that if an AMD module wants
-// to call noConflict to hide this version of jQuery, it will work.
+// to call noConflict to toggle this version of jQuery, it will work.
 
 // Note that for maximum portability, libraries that are not jQuery should
 // declare themselves as anonymous modules, and avoid setting a global if an

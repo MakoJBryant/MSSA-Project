@@ -1165,7 +1165,7 @@
   var Event$3 = {
     SHOW: "show" + EVENT_KEY$3,
     SHOWN: "shown" + EVENT_KEY$3,
-    HIDE: "hide" + EVENT_KEY$3,
+    toggle: "toggle" + EVENT_KEY$3,
     HIDDEN: "hidden" + EVENT_KEY$3,
     CLICK_DATA_API: "click" + EVENT_KEY$3 + DATA_API_KEY$3
   };
@@ -1231,7 +1231,7 @@
     // Public
     _proto.toggle = function toggle() {
       if ($(this._element).hasClass(ClassName$3.SHOW)) {
-        this.hide();
+        this.toggle();
       } else {
         this.show();
       }
@@ -1277,7 +1277,7 @@
       }
 
       if (actives) {
-        Collapse._jQueryInterface.call($(actives).not(this._selector), 'hide');
+        Collapse._jQueryInterface.call($(actives).not(this._selector), 'toggle');
 
         if (!activesData) {
           $(actives).data(DATA_KEY$3, null);
@@ -1311,14 +1311,14 @@
       this._element.style[dimension] = this._element[scrollSize] + "px";
     };
 
-    _proto.hide = function hide() {
+    _proto.toggle = function toggle() {
       var _this2 = this;
 
       if (this._isTransitioning || !$(this._element).hasClass(ClassName$3.SHOW)) {
         return;
       }
 
-      var startEvent = $.Event(Event$3.HIDE);
+      var startEvent = $.Event(Event$3.toggle);
       $(this._element).trigger(startEvent);
 
       if (startEvent.isDefaultPrevented()) {
@@ -1431,7 +1431,7 @@
 
         var _config = _objectSpread({}, Default$1, $this.data(), typeof config === 'object' && config ? config : {});
 
-        if (!data && _config.toggle && /show|hide/.test(config)) {
+        if (!data && _config.toggle && /show|toggle/.test(config)) {
           _config.toggle = false;
         }
 
@@ -1528,7 +1528,7 @@
 
   var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
   var Event$4 = {
-    HIDE: "hide" + EVENT_KEY$4,
+    toggle: "toggle" + EVENT_KEY$4,
     HIDDEN: "hidden" + EVENT_KEY$4,
     SHOW: "show" + EVENT_KEY$4,
     SHOWN: "shown" + EVENT_KEY$4,
@@ -1697,7 +1697,7 @@
       $(parent).toggleClass(ClassName$4.SHOW).trigger($.Event(Event$4.SHOWN, relatedTarget));
     };
 
-    _proto.hide = function hide() {
+    _proto.toggle = function toggle() {
       if (this._element.disabled || $(this._element).hasClass(ClassName$4.DISABLED) || !$(this._menu).hasClass(ClassName$4.SHOW)) {
         return;
       }
@@ -1705,13 +1705,13 @@
       var relatedTarget = {
         relatedTarget: this._element
       };
-      var hideEvent = $.Event(Event$4.HIDE, relatedTarget);
+      var toggleEvent = $.Event(Event$4.toggle, relatedTarget);
 
       var parent = Dropdown._getParentFromElement(this._element);
 
-      $(parent).trigger(hideEvent);
+      $(parent).trigger(toggleEvent);
 
-      if (hideEvent.isDefaultPrevented()) {
+      if (toggleEvent.isDefaultPrevented()) {
         return;
       }
 
@@ -1891,10 +1891,10 @@
           continue;
         }
 
-        var hideEvent = $.Event(Event$4.HIDE, relatedTarget);
-        $(parent).trigger(hideEvent);
+        var toggleEvent = $.Event(Event$4.toggle, relatedTarget);
+        $(parent).trigger(toggleEvent);
 
-        if (hideEvent.isDefaultPrevented()) {
+        if (toggleEvent.isDefaultPrevented()) {
           continue;
         } // If this is a touch-enabled device we remove the extra
         // empty mouseover listeners we added for iOS support
@@ -2055,7 +2055,7 @@
     show: 'boolean'
   };
   var Event$5 = {
-    HIDE: "hide" + EVENT_KEY$5,
+    toggle: "toggle" + EVENT_KEY$5,
     HIDDEN: "hidden" + EVENT_KEY$5,
     SHOW: "show" + EVENT_KEY$5,
     SHOWN: "shown" + EVENT_KEY$5,
@@ -2110,7 +2110,7 @@
 
     // Public
     _proto.toggle = function toggle(relatedTarget) {
-      return this._isShown ? this.hide() : this.show(relatedTarget);
+      return this._isShown ? this.toggle() : this.show(relatedTarget);
     };
 
     _proto.show = function show(relatedTarget) {
@@ -2146,7 +2146,7 @@
       this._setResizeEvent();
 
       $(this._element).on(Event$5.CLICK_DISMISS, Selector$5.DATA_DISMISS, function (event) {
-        return _this.hide(event);
+        return _this.toggle(event);
       });
       $(this._dialog).on(Event$5.MOUSEDOWN_DISMISS, function () {
         $(_this._element).one(Event$5.MOUSEUP_DISMISS, function (event) {
@@ -2161,7 +2161,7 @@
       });
     };
 
-    _proto.hide = function hide(event) {
+    _proto.toggle = function toggle(event) {
       var _this2 = this;
 
       if (event) {
@@ -2172,10 +2172,10 @@
         return;
       }
 
-      var hideEvent = $.Event(Event$5.HIDE);
-      $(this._element).trigger(hideEvent);
+      var toggleEvent = $.Event(Event$5.toggle);
+      $(this._element).trigger(toggleEvent);
 
-      if (!this._isShown || hideEvent.isDefaultPrevented()) {
+      if (!this._isShown || toggleEvent.isDefaultPrevented()) {
         return;
       }
 
@@ -2198,10 +2198,10 @@
       if (transition) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
         $(this._element).one(Util.TRANSITION_END, function (event) {
-          return _this2._hideModal(event);
+          return _this2._toggleModal(event);
         }).emulateTransitionEnd(transitionDuration);
       } else {
-        this._hideModal();
+        this._toggleModal();
       }
     };
 
@@ -2311,7 +2311,7 @@
           if (event.which === ESCAPE_KEYCODE$1) {
             event.preventDefault();
 
-            _this5.hide();
+            _this5.toggle();
           }
         });
       } else if (!this._isShown) {
@@ -2331,7 +2331,7 @@
       }
     };
 
-    _proto._hideModal = function _hideModal() {
+    _proto._toggleModal = function _toggleModal() {
       var _this7 = this;
 
       this._element.style.display = 'none';
@@ -2387,7 +2387,7 @@
           if (_this8._config.backdrop === 'static') {
             _this8._element.focus();
           } else {
-            _this8.hide();
+            _this8.toggle();
           }
         });
 
@@ -2791,7 +2791,7 @@
     OUT: 'out'
   };
   var Event$6 = {
-    HIDE: "hide" + EVENT_KEY$6,
+    toggle: "toggle" + EVENT_KEY$6,
     HIDDEN: "hidden" + EVENT_KEY$6,
     SHOW: "show" + EVENT_KEY$6,
     SHOWN: "shown" + EVENT_KEY$6,
@@ -2902,7 +2902,7 @@
       clearTimeout(this._timeout);
       $.removeData(this.element, this.constructor.DATA_KEY);
       $(this.element).off(this.constructor.EVENT_KEY);
-      $(this.element).closest('.modal').off('hide.bs.modal');
+      $(this.element).closest('.modal').off('toggle.bs.modal');
 
       if (this.tip) {
         $(this.tip).remove();
@@ -3021,11 +3021,11 @@
       }
     };
 
-    _proto.hide = function hide(callback) {
+    _proto.toggle = function toggle(callback) {
       var _this2 = this;
 
       var tip = this.getTipElement();
-      var hideEvent = $.Event(this.constructor.Event.HIDE);
+      var toggleEvent = $.Event(this.constructor.Event.toggle);
 
       var complete = function complete() {
         if (_this2._hoverState !== HoverState.SHOW && tip.parentNode) {
@@ -3047,9 +3047,9 @@
         }
       };
 
-      $(this.element).trigger(hideEvent);
+      $(this.element).trigger(toggleEvent);
 
-      if (hideEvent.isDefaultPrevented()) {
+      if (toggleEvent.isDefaultPrevented()) {
         return;
       }
 
@@ -3188,9 +3188,9 @@
           });
         }
       });
-      $(this.element).closest('.modal').on('hide.bs.modal', function () {
+      $(this.element).closest('.modal').on('toggle.bs.modal', function () {
         if (_this4.element) {
-          _this4.hide();
+          _this4.toggle();
         }
       });
 
@@ -3266,16 +3266,16 @@
       clearTimeout(context._timeout);
       context._hoverState = HoverState.OUT;
 
-      if (!context.config.delay || !context.config.delay.hide) {
-        context.hide();
+      if (!context.config.delay || !context.config.delay.toggle) {
+        context.toggle();
         return;
       }
 
       context._timeout = setTimeout(function () {
         if (context._hoverState === HoverState.OUT) {
-          context.hide();
+          context.toggle();
         }
-      }, context.config.delay.hide);
+      }, context.config.delay.toggle);
     };
 
     _proto._isWithActiveTrigger = function _isWithActiveTrigger() {
@@ -3300,7 +3300,7 @@
       if (typeof config.delay === 'number') {
         config.delay = {
           show: config.delay,
-          hide: config.delay
+          toggle: config.delay
         };
       }
 
@@ -3363,7 +3363,7 @@
 
       $(tip).removeClass(ClassName$6.FADE);
       this.config.animation = false;
-      this.hide();
+      this.toggle();
       this.show();
       this.config.animation = initConfigAnimation;
     } // Static
@@ -3375,7 +3375,7 @@
 
         var _config = typeof config === 'object' && config;
 
-        if (!data && /dispose|hide/.test(config)) {
+        if (!data && /dispose|toggle/.test(config)) {
           return;
         }
 
@@ -3482,7 +3482,7 @@
     CONTENT: '.popover-body'
   };
   var Event$7 = {
-    HIDE: "hide" + EVENT_KEY$7,
+    toggle: "toggle" + EVENT_KEY$7,
     HIDDEN: "hidden" + EVENT_KEY$7,
     SHOW: "show" + EVENT_KEY$7,
     SHOWN: "shown" + EVENT_KEY$7,
@@ -3561,7 +3561,7 @@
 
         var _config = typeof config === 'object' ? config : null;
 
-        if (!data && /dispose|hide/.test(config)) {
+        if (!data && /dispose|toggle/.test(config)) {
           return;
         }
 
@@ -3955,7 +3955,7 @@
   var DATA_API_KEY$7 = '.data-api';
   var JQUERY_NO_CONFLICT$9 = $.fn[NAME$9];
   var Event$9 = {
-    HIDE: "hide" + EVENT_KEY$9,
+    toggle: "toggle" + EVENT_KEY$9,
     HIDDEN: "hidden" + EVENT_KEY$9,
     SHOW: "show" + EVENT_KEY$9,
     SHOWN: "shown" + EVENT_KEY$9,
@@ -4013,7 +4013,7 @@
         previous = previous[previous.length - 1];
       }
 
-      var hideEvent = $.Event(Event$9.HIDE, {
+      var toggleEvent = $.Event(Event$9.toggle, {
         relatedTarget: this._element
       });
       var showEvent = $.Event(Event$9.SHOW, {
@@ -4021,12 +4021,12 @@
       });
 
       if (previous) {
-        $(previous).trigger(hideEvent);
+        $(previous).trigger(toggleEvent);
       }
 
       $(this._element).trigger(showEvent);
 
-      if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) {
+      if (showEvent.isDefaultPrevented() || toggleEvent.isDefaultPrevented()) {
         return;
       }
 
@@ -4190,25 +4190,25 @@
   var JQUERY_NO_CONFLICT$a = $.fn[NAME$a];
   var Event$a = {
     CLICK_DISMISS: "click.dismiss" + EVENT_KEY$a,
-    HIDE: "hide" + EVENT_KEY$a,
+    toggle: "toggle" + EVENT_KEY$a,
     HIDDEN: "hidden" + EVENT_KEY$a,
     SHOW: "show" + EVENT_KEY$a,
     SHOWN: "shown" + EVENT_KEY$a
   };
   var ClassName$a = {
     FADE: 'fade',
-    HIDE: 'hide',
+    toggle: 'toggle',
     SHOW: 'show',
     SHOWING: 'showing'
   };
   var DefaultType$7 = {
     animation: 'boolean',
-    autohide: 'boolean',
+    autotoggle: 'boolean',
     delay: 'number'
   };
   var Default$7 = {
     animation: true,
-    autohide: true,
+    autotoggle: true,
     delay: 500
   };
   var Selector$a = {
@@ -4252,12 +4252,12 @@
 
         $(_this._element).trigger(Event$a.SHOWN);
 
-        if (_this._config.autohide) {
-          _this.hide();
+        if (_this._config.autotoggle) {
+          _this.toggle();
         }
       };
 
-      this._element.classList.remove(ClassName$a.HIDE);
+      this._element.classList.remove(ClassName$a.toggle);
 
       this._element.classList.add(ClassName$a.SHOWING);
 
@@ -4269,14 +4269,14 @@
       }
     };
 
-    _proto.hide = function hide(withoutTimeout) {
+    _proto.toggle = function toggle(withoutTimeout) {
       var _this2 = this;
 
       if (!this._element.classList.contains(ClassName$a.SHOW)) {
         return;
       }
 
-      $(this._element).trigger(Event$a.HIDE);
+      $(this._element).trigger(Event$a.toggle);
 
       if (withoutTimeout) {
         this._close();
@@ -4312,7 +4312,7 @@
       var _this3 = this;
 
       $(this._element).on(Event$a.CLICK_DISMISS, Selector$a.DATA_DISMISS, function () {
-        return _this3.hide(true);
+        return _this3.toggle(true);
       });
     };
 
@@ -4320,7 +4320,7 @@
       var _this4 = this;
 
       var complete = function complete() {
-        _this4._element.classList.add(ClassName$a.HIDE);
+        _this4._element.classList.add(ClassName$a.toggle);
 
         $(_this4._element).trigger(Event$a.HIDDEN);
       };

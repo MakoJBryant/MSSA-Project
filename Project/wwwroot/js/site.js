@@ -6,13 +6,13 @@
 $(document).ready(function () {
 
     // This is a javascript comment.
-    $(".navShowHide").on("click", function () {
+    $(".navShowtoggle").on("click", function () {
 
         var main = $("#mainSectionContainer");
         var nav = $("#sideNavContainer");
 
         if (main.hasClass("leftPadding")) {
-            nav.hide();
+            nav.toggle();
         }
         else {
             nav.show();

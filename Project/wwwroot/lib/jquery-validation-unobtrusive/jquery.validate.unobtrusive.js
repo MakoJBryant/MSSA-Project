@@ -62,7 +62,7 @@
             error.removeClass("input-validation-error").appendTo(container);
         }
         else {
-            error.hide();
+            error.toggle();
         }
     }
 

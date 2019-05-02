@@ -287,12 +287,12 @@ $.extend( $.validator, {
 		onfocusin: function( element ) {
 			this.lastActive = element;
 
-			// Hide error label and remove error class on focus if enabled
+			// toggle error label and remove error class on focus if enabled
 			if ( this.settings.focusCleanup ) {
 				if ( this.settings.unhighlight ) {
 					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
 				}
-				this.hideThese( this.errorsFor( element ) );
+				this.toggleThese( this.errorsFor( element ) );
 			}
 		},
 		onfocusout: function( element ) {
@@ -499,8 +499,8 @@ $.extend( $.validator, {
 
 				if ( !this.numberOfInvalids() ) {
 
-					// Hide error containers on last error
-					this.toHide = this.toHide.add( this.containers );
+					// toggle error containers on last error
+					this.totoggle = this.totoggle.add( this.containers );
 				}
 				this.showErrors();
 
@@ -545,7 +545,7 @@ $.extend( $.validator, {
 			this.invalid = {};
 			this.submitted = {};
 			this.prepareForm();
-			this.hideErrors();
+			this.toggleErrors();
 			var elements = this.elements()
 				.removeData( "previousValue" )
 				.removeAttr( "aria-invalid" );
@@ -588,13 +588,13 @@ $.extend( $.validator, {
 			return count;
 		},
 
-		hideErrors: function() {
-			this.hideThese( this.toHide );
+		toggleErrors: function() {
+			this.toggleThese( this.totoggle );
 		},
 
-		hideThese: function( errors ) {
+		toggleThese: function( errors ) {
 			errors.not( this.containers ).text( "" );
-			this.addWrapper( errors ).hide();
+			this.addWrapper( errors ).toggle();
 		},
 
 		valid: function() {
@@ -673,7 +673,7 @@ $.extend( $.validator, {
 			this.errorList = [];
 			this.errorMap = {};
 			this.toShow = $( [] );
-			this.toHide = $( [] );
+			this.totoggle = $( [] );
 		},
 
 		reset: function() {
@@ -683,12 +683,12 @@ $.extend( $.validator, {
 
 		prepareForm: function() {
 			this.reset();
-			this.toHide = this.errors().add( this.containers );
+			this.totoggle = this.errors().add( this.containers );
 		},
 
 		prepareElement: function( element ) {
 			this.reset();
-			this.toHide = this.errorsFor( element );
+			this.totoggle = this.errorsFor( element );
 		},
 
 		elementValue: function( element ) {
@@ -785,7 +785,7 @@ $.extend( $.validator, {
 					dependencyMismatch = false;
 
 					if ( result === "pending" ) {
-						this.toHide = this.toHide.not( this.errorsFor( element ) );
+						this.totoggle = this.totoggle.not( this.errorsFor( element ) );
 						return;
 					}
 
@@ -912,8 +912,8 @@ $.extend( $.validator, {
 					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorClass, this.settings.validClass );
 				}
 			}
-			this.toHide = this.toHide.not( this.toShow );
-			this.hideErrors();
+			this.totoggle = this.totoggle.not( this.toShow );
+			this.toggleErrors();
 			this.addWrapper( this.toShow ).show();
 		},
 
@@ -954,7 +954,7 @@ $.extend( $.validator, {
 
 					// Make sure the element is visible, even in IE
 					// actually showing the wrapped element is handled elsewhere
-					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
+					place = error.toggle().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
 				}
 				if ( this.labelContainer.length ) {
 					this.labelContainer.append( place );
@@ -1540,7 +1540,7 @@ $.extend( $.validator, {
 					if ( valid ) {
 						submitted = validator.formSubmitted;
 						validator.resetInternals();
-						validator.toHide = validator.errorsFor( element );
+						validator.totoggle = validator.errorsFor( element );
 						validator.formSubmitted = submitted;
 						validator.successList.push( element );
 						validator.invalid[ element.name ] = false;

@@ -39,14 +39,19 @@ a:hover {
 }
 
     #mastHeadContainer button:not(.searchButton),
-    #mastHeadContainer .rightIcons img {
+    #mastHeadContainer button:not(.close),
+    #mastHeadContainer .rightIcons img
+    #mastHeadContainer .rightIcons button {
         cursor: pointer;
         width: 40px;
         height: 40px;
-        padding: 8px;
         box-sizing: border-box;
         border: none;
         background-color: transparent;
+    }
+
+    #mastHeadContainer .rightIcons a {
+        padding: 0 5px;
     }
 
     #mastHeadContainer button img {
@@ -136,15 +141,11 @@ a:hover {
     box-shadow: rgba(250, 250, 250, 0.1) 0 1px 2px;
 }
 
-.signInContainer {
-    background-color: #efefee;
-    height: 100vh;
+.modal-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-    .signInContainer .column {
+    .modal-content {
         flex-grow: 0;
         width: 450px;
         padding: 20px 35px;
@@ -152,15 +153,19 @@ a:hover {
         overflow-y: auto;
     }
 
-        .signInContainer .column .header img {
-            width: 100px;
-        }
-
-        .signInContainer .column .header {
+        .modal-content .header {
             padding: 20px 0;
         }
 
-            .signInContainer .column .header h3 {
+        .modal-content .header img {
+            width: 150px;
+        }
+
+        .modal-content .header button {
+            align-content: flex-end;
+        }
+
+            .modal-content .header h3 {
                 font-size: 24px;
                 font-weight: 400;
                 line-height: 32px;
@@ -169,25 +174,29 @@ a:hover {
                 padding-top: 16px;
             }
 
-            .signInContainer .column .header span {
+            .modal-content .header span {
                 font-size: 14px;
             }
 
-        .signInContainer .column form {
+        .modal-content .modal-body {
+            padding: 0;
+        }
+
+        .modal-content .modal-body form {
             display: flex;
             flex-direction: column;
         }
 
-            .signInContainer .column form input[type="text"],
-            .signInContainer .column form input[type="email"],
-            .signInContainer .column form input[type="password"] {
+            .modal-content .modal-body form input[type="text"],
+            .modal-content .modal-body form input[type="email"],
+            .modal-content .modal-body form input[type="password"] {
                 font-size: 14px;
                 margin: 10px 0;
                 border: none;
                 border-bottom: 1px solid #dedede;
             }
 
-            .signInContainer .column form input[type="submit"] {
+            .modal-content .modal-body form input[type="submit"] {
                 background: #4285f4;
                 color: #fff;
                 height: 36px;
