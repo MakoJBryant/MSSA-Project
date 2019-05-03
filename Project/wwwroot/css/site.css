@@ -237,3 +237,6 @@ a:hover {
     padding-left: 24px;
 }
 
+.cookieConsent {
+    flex: 1;
+}
