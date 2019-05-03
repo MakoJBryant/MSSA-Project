@@ -40,6 +40,7 @@ a:hover {
 
     #mastHeadContainer button:not(.searchButton),
     #mastHeadContainer button:not(.close),
+    #mastHeadContainer button:not(.submit),
     #mastHeadContainer .rightIcons img
     #mastHeadContainer .rightIcons button {
         cursor: pointer;

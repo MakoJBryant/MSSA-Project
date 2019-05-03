@@ -1,0 +1,23 @@
+@model WebUI.ViewModels.UserAccountViewModel
+
+    <form asp-controller="UserAccount" asp-action="Register" method="post">
+
+        <input type="email" asp-for="Email" name="email" placeholder="Email" autocomplete="off" class="form-control" id="RegEmail" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <input type="email" asp-for="ConfirmEmail" name="confirmEmail" placeholder="Confirm Email" class="form-control" id="RegConfirmPassword" required />
+        <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+
+        <input type="password" asp-for="Password" name="password" placeholder="Password" class="form-control" id="RegPassword" required />
+        <span asp-validation-for="Password"></span>
+
+        <input type="password" asp-for="ConfirmPassword" name="confirmPassword" placeholder="Confirm Password" class="form-control" id="RegConfirmPassword" required />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        <input type="submit" name="submitButton" value="SUBMIT">
+
+    </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,3 +1,4 @@
+@model WebUI.ViewModels.UserAccountViewModel
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -19,17 +20,16 @@
         </a>
 
         <!-- Button to open signInModal -->
-        <button type="button" class="rightIcons" data-toggle="modal" data-target="#signInModal">
+        <button type="button" class="rightIcons" data-toggle="modal" data-target="#signInModal" aria-hidden="true">
             <img src="~/images/profilePictures/default.png" />
         </button>
     }
 </div>
 
-<div class="modal fade" id="signInModal" data-backdrop="false">
+<div class="modal fade" id="signInModal" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5)">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <!-- Header -->
             <div class="header">
                 <img src="~/images/icons/TheAzureTubeLogo.png" title="logo" alt="Site Logo">
                 <button type="button" class="close" data-dismiss="modal">x</button>
@@ -37,38 +37,24 @@
                 <span>to continue to TheAzureTube</span>
             </div>
 
-            <!-- Body -->
             <div class="modal-body">
-                <div class="signInForm">
-
-                    <form action="" method="POST">
-
-                        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
-                        <input type="password" name="password" placeholder="Password" required>
-                        <input type="submit" name="submitButton" value="SUBMIT">
-
-                    </form>
-
-                </div>
-
-                <!-- Link to open signUpModal -->
-                <a data-toggle="modal" href="#signUpModal" data-dismiss="modal">
-                    Need an account? Sign up here!
-                </a>
-
+                <partial name="_LoginForm" />
             </div>
 
+            <!-- Link to open signUpModal -->
+            <a data-toggle="modal" href="#signUpModal" data-dismiss="modal" aria-hidden="true">
+                Need an account? Sign up here!
+            </a>
 
         </div>
     </div>
 </div>
 
 
-<div class="modal fade" id="signUpModal" data-backdrop="true">
+<div class="modal fade" id="signUpModal" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5)">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <!-- Header -->
             <div class="header">
                 <img src="~/images/icons/TheAzureTubeLogo.png" title="logo" alt="Site Logo">
                 <button type="button" class="close" data-dismiss="modal">x</button>
@@ -76,66 +62,20 @@
                 <span>to continue to TheAzureTube</span>
             </div>
 
-            <!-- Body -->
             <div class="modal-body">
-                <div class="signInForm">
-
-                    <form action="" method="POST">
-
-                        <input type="text" name="firstName" placeholder="First Name" " autocomplete="off" required>
-                        <input type="text" name="lastName" placeholder="Last Name" autocomplete="off" required>
-                        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
-                        <input type="email" name="email" placeholder="Email" autocomplete="off" required>
-                        <input type="email" name="email2" placeholder="Confirm email" value="<?php getInputValue('email2'); ?>" autocomplete="off" required>
-                        <input type="password" name="password" placeholder="Password" autocomplete="off" required>
-                        <input type="password" name="password2" placeholder="Confirm password" autocomplete="off" required>
-                        <button id="login" type="button" class="submitButton"></button>
-                        <!--<input type="submit" id="login" name="submitButton" value="SUBMIT">-->
-
-                    </form>
-
-                </div>
-
-                <!-- Link to open signUpModal -->
-                <a data-toggle="#signUpModal" href="#signUpModal" data-dismiss="modal">
-                    Already have an account? Sign in here!
-                </a>
+                <partial name="_RegisterForm" />
             </div>
 
-
+            <!-- Link to open signInModal 
+            <a data-toggle="#modal" href="#signInModal" data-dismiss="modal" aria-hidden="true">
+                Already have an account? Sign in here!
+            </a>
+                -->
+            
         </div>
     </div>
 </div>
 
 @section Scripts {
-    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-    <script>
-        $('#login').on('click', function () {
-
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-            if ($("#rememberme").is(':checked')) {
-                var rememberme = true;
-            } else {
-                var rememberme = false;
-            }
-
-            var data = { "Email": email, "Password": password, "RememberMe": rememberme };
-            $.ajax({
-
-                type: "POST",
-                url: "/Identity/Account/Login?handler=Test",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("XSRF-TOKEN",
-                        $('input:hidden[name="__RequestVerificationToken"]').val());
-                },
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(data),
-                dataType: "json",
-                success: function (response) {
-
-                }
-            });
-        });
-    </script>
+    <partial name="_ValidationScriptsPartial" />
 }
