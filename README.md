@@ -1,5 +1,5 @@
 # VideoTube
-This is a Microsoft Software &amp; Systems Academy project that utilizes the ASP.NET Core 2.2 MVC formate for web apps. The purpose of this project is to get experience with building a website that hosts video media, similar to YouTube.
+This is a Microsoft Software &amp; Systems Academy project that utilizes the ASP.NET Core 2.2 MVC format for web apps. The purpose of this project is to get experience with building a website that hosts video media, similar to YouTube.
 
 ASP.NET Core 2.2 MVC web app
  - Published and hosted on Azure.
