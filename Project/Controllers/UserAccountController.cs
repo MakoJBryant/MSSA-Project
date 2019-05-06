@@ -108,7 +108,7 @@ namespace WebUI.Controllers
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View();
+                return View("_AccountError");
             }
         }       
     }

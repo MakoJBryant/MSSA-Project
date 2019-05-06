@@ -1,0 +1,24 @@
+﻿@model WebUI.ViewModels.UserAccountViewModel
+
+@{
+    ViewData["Title"] = "_AccountError";
+}
+
+<h1>_AccountError</h1>
+
+<div>
+    <h4>UserAccountViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ErrorMessage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ErrorMessage)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
