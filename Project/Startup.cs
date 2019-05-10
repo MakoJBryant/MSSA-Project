@@ -54,10 +54,7 @@ namespace Project
             services.AddDbContext<ApplicationDataContext>(options =>
                 options.UseSqlServer(applicationDataConnection));
 
-            services.AddDefaultIdentity<IdentityUser>(config =>
-            {
-                config.SignIn.RequireConfirmedEmail = true;
-            })
+            services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<UserAuthenticationContext>();
 

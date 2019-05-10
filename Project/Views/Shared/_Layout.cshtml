@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,40 +29,56 @@
     </environment>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .small {
+            max-height: 40px;
+            max-width: 40px;
+        }
+    </style>
 </head>
 <body>
-    <div id="pageContainer">
 
-        <div id="mastHeadContainer">
 
-            <button class="navShowHide">
-                <img src="~/images/icons/menu.png" />
-            </button>
+    <div id="mastHeadContainer">
 
-            <a class="logoContainer" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="~/images/icons/TheAzureTubeLogo.png" />
-            </a>
+        <button class="navShowHide">
+            <img src="~/images/icons/menu.png" />
+        </button>
 
-            <div class="searchBarContainer">
+        <a class="logoContainer" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="~/images/icons/TheAzureTubeLogo.png" />
+        </a>
 
-            </div>
-
-            <div class="rightIcons">
-                <partial name="_LoginPartial" />
-            </div>
-        </div>
-
-        <div id="sideNavContainer" style="display:none;">
+        <div class="searchBarContainer">
 
         </div>
 
-        <div id="mainSectionContainer">
-            <div id="mainContentContainer">
-                <partial name="_CookieConsentPartial" />
-                @RenderBody()
-            </div>
+        <div class="rightIcons">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a>Youre Logged In</a>
+                <a asp-controller="Blobs" asp-action="UploadBlob">
+                    <img src="~/images/icons/upload.png" />
+                </a>
+                <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <img class="small" src="~/images/profilePictures/default-male.png" />
+                </a>
+            }
         </div>
     </div>
+
+    <div id="sideNavContainer" style="display:none;">
+
+    </div>
+
+
+    <div class="container-fluid">
+        <partial name="_CookieConsentPartial" />
+        @RenderBody()
+    </div>
+
+
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

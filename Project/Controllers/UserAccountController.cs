@@ -32,18 +32,7 @@ namespace WebUI.Controllers
         // Get the current users ID
         private string _currentUser { get { return _userManager.GetUserId(User); } }
 
-        [HttpGet]
-        [Authorize]
-        public ActionResult Index()
-        {
-            UserAccountViewModel UserModel = new UserAccountViewModel
-            {
-
-            };
-
-            return View(UserModel);
-        }
-
+        
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()

@@ -15,5 +15,12 @@ namespace Project.Data
 
         public DbSet<VideoModel> Videos { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<VideoModel>()
+                .Property(v => v.DatePosted)
+                .HasDefaultValue(DateTime.Today);
+        }
     }
 }

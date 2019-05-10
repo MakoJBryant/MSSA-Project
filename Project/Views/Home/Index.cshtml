@@ -2,3 +2,72 @@
     ViewData["Title"] = "Home Page";
 }
 
+<body>
+    <div class="row">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-4 pt-lg-5">
+            <button type="button" class="btn btn-lg btn-block btn-primary"  data-toggle="modal" data-target="#signInModal" aria-hidden="true">
+                <h1>Sign-In</h1>
+            </button>
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+</body>
+
+
+
+
+
+<div class="modal fade" id="signInModal" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5)">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="header">
+                <img src="~/images/icons/TheAzureTubeLogo.png" title="logo" alt="Site Logo">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3>Sign In</h3>
+                <span>to continue to TheAzureTube</span>
+            </div>
+
+            <div class="modal-body">
+                <partial name="_LoginForm" />
+            </div>
+
+            <!-- Link to open signUpModal -->
+            <a data-toggle="modal" href="#signUpModal" data-dismiss="modal" aria-hidden="true">
+                Need an account? Sign up here!
+            </a>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="signUpModal" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5)">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="header">
+                <img src="~/images/icons/TheAzureTubeLogo.png" title="logo" alt="Site Logo">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3>Sign up</h3>
+                <span>to continue to TheAzureTube</span>
+            </div>
+
+            <div class="modal-body">
+                <partial name="_RegisterForm" />
+            </div>
+
+            <!-- Link to open signInModal
+            <a data-toggle="#modal" href="#signInModal" data-dismiss="modal" aria-hidden="true">
+                Already have an account? Sign in here!
+            </a>
+                -->
+
+        </div>
+    </div>
+</div>

@@ -9,15 +9,26 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using Project.Models;
+using Microsoft.AspNetCore.Identity;
+using Project.Data;
 
 namespace Project.Controllers
 {
     public class BlobsController : Controller
     {
-        public IActionResult Index()
+        // JH- Created Dependancy injection with overridden constructor
+
+        private readonly ApplicationDataContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public BlobsController(UserManager<IdentityUser> UserManager, ApplicationDataContext Context)
         {
-            return View();
+            _context = Context;
+            _userManager = UserManager;
         }
+
+        private string currentUser { get { return _userManager.GetUserId(User); } }
 
         private CloudBlobContainer GetCloudBlobContainer()
         {
@@ -36,7 +47,7 @@ namespace Project.Controllers
             return container;
         }
 
-        public ActionResult CreateBlobContainer()
+        private ActionResult CreateBlobContainer()
         {
             CloudBlobContainer container = GetCloudBlobContainer();
             ViewBag.Success = container.CreateIfNotExistsAsync().Result;
@@ -45,15 +56,48 @@ namespace Project.Controllers
             return View();
         }
 
-        public string UploadBlob()
+        [HttpGet]
+        public IActionResult UploadBlob()
+        {
+            VideoModel VM = new VideoModel();
+
+            return View(VM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadBlob([Bind("Title, VideoLink, Title, Description, DatePosted")]VideoModel VM)
         {
             CloudBlobContainer container = GetCloudBlobContainer();
-            CloudBlockBlob blob = container.GetBlockBlobReference("video.mp4");
-            using (var fileStream = System.IO.File.OpenRead(@"C:\Users\WWStudent\Desktop\video.mp4"))
+            CloudBlockBlob blob = container.GetBlockBlobReference(VM.Title);
+            // Create the blob in blob storage
+            var path = $@"{VM.VideoLink}";
+
+            var req = System.Net.WebRequest.Create(VM.VideoLink);
+            using (Stream stream = req.GetResponse().GetResponseStream())
+            {
+                blob.UploadFromStreamAsync(stream).Wait();
+            }
+
+            var Wd = Directory.GetCurrentDirectory();
+           
+           /* using (var fileStream = System.IO.File.OpenRead(path))
             {
                 blob.UploadFromStreamAsync(fileStream).Wait();
+            }*/
+
+            VM.Owner = currentUser;
+            // Add video meta data to the SQL DB
+            if (ModelState.IsValid)
+            {
+                _context.Add(VM);
+                await _context.SaveChangesAsync();
+
+                return View("Home/Index");
             }
-            return "success!";
+
+            // if we got this far something went wrong
+            return View();
+
         }
         
         public ActionResult ListBlobs()
